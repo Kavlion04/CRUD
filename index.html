@@ -15,22 +15,26 @@
 
 </head>
 
-<body>
-    <div class="container-lg">
+<body data-theme="light">
+    <button id="theme-toggle" class="btn btn-outline-secondary">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="container-lg constr">
         <div class="input-group mb-3 p-3">
             <input type="text" class="form-control" placeholder="Search for..." id="search">
 
             <span class="input-group-text">
                 <select class="form-select" id="filter">
                     <option value="All" selected>All</option>
-                    <option value="N13">N13</option>
+                    <option value="N90">N90</option>
                     <option value="N85">N85</option>
                     <option value="N95">N95</option>
                     <option value="N99">N99</option>
                 </select>
             </span>
-            <button data-bs-toggle="modal" data-bs-target="#addBtn" class="btn btn-success font-[20px] font-[sans-serif] text-[white]" type="button"
-                id="btn2">Add New <i class="fa-regular fa-address-book"></i>
+            <button data-bs-toggle="modal" data-bs-target="#addBtn"
+                class="btn btn-success font-[20px] font-[sans-serif] text-[white]" type="button" id="btn2">Add New <i
+                    class="fa-regular fa-address-book"></i>
             </button>
         </div>
         <table class="table">
@@ -63,8 +67,13 @@
 
         </table>
 
-        
-        <div class="modal fade" id="addBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="no-results">
+            <i class="fas fa-search"></i>
+            <p>Bunday ma'lumotga tegishli inson yo'q</p>
+        </div>
+
+        <div class="modal fade modals " id="addBtn" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -84,7 +93,7 @@
                             <div class="mb-3">
                                 <label for="guruh" class="col-form-label" id="studentClass">Guruh:</label>
                                 <select class="form-select" id="studentClass">
-                                    <option selected value="N13">N13</option>
+                                    <option selected value="N90">N90</option>
                                     <option value="N85">N85</option>
                                     <option value="N95">N95</option>
                                     <option value="N99">N99</option>
@@ -96,13 +105,34 @@
                                 <label class="form-check-label" for="hasWork">
                                     Ishlaydimi?
                                 </label>
-                              </div>
-                             
-                              <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish!</button>
-                                  <button type="submit" class="btn btn-primary" id="save">Saqlash!</button>
-                              </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish!</button>
+                                <button type="submit" class="btn btn-primary" id="save">Saqlash!</button>
+                            </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center pb-4">
+                        <i class="fas fa-exclamation-circle text-warning delete-icon mb-3"></i>
+                        <h4 class="modal-title mb-3" id="deleteModalLabel">O'chirishni tasdiqlaysizmi?</h4>
+                        <p class="delete-message mb-4">Bu ma'lumotni o'chirib tashlamoqchimisiz?</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Bekor
+                                qilish</button>
+                            <button type="button" class="btn btn-danger px-4" id="confirmDelete">O'chirish</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,8 +150,9 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="./js/theme.js"></script>
     <script src="./js/app.js"></script>
 
 </body>

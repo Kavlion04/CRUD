@@ -5,10 +5,14 @@ const filterSelect = document.getElementById('filter');
 const modalTitle = document.querySelector('.modal-title');
 const saveBtn = document.getElementById('save');
 const btn2 = document.getElementById('btn2');
+const noResults = document.querySelector('.no-results');
 const students = loadData();
 let searchValue = "";
 let filterValue = "All";
 let selectedUsers = null;
+let selectedDeleteIndex = null;
+const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+const confirmDeleteBtn = document.getElementById('confirmDelete');
 
 btn2.addEventListener('click', () => {
     modalTitle.innerHTML = "Yangi o'quvchi qo'shish";
@@ -31,6 +35,7 @@ filterSelect.addEventListener('change', (e) => {
 renderStudents();
 function renderStudents() {
     tbody.innerHTML = '';
+    noResults.style.display = 'none';
 
     let filteredData = students;
 
@@ -40,8 +45,12 @@ function renderStudents() {
         }
     })
     if(filterValue !== "All"){
-        
-        filteredData = students.filter((student) => student.Class === filterValue)        
+        filteredData = filteredData.filter((student) => student.Class === filterValue)        
+    }
+
+    if (filteredData.length === 0) {
+        noResults.style.display = 'block';
+        return;
     }
 
     filteredData.map((student, i) => {
@@ -143,25 +152,31 @@ function loadData() {
 }
 
 function deleteStudent(i) {
-    const isDelete = confirm("O'chirmoqchimisiz?");
-    if(isDelete) {
-        students.splice(i, 1);
-        renderStudents();
+    selectedDeleteIndex = i;
+    deleteModal.show();
+}
+
+confirmDeleteBtn.addEventListener('click', () => {
+    if (selectedDeleteIndex !== null) {
+        students.splice(selectedDeleteIndex, 1);
         saveData();
+        renderStudents();
+        deleteModal.hide();
+        selectedDeleteIndex = null;
+
         Toastify({
             text: "Ma'lumot o'chirildi",
+            className: "info",
             close: true,
             duration: 3000,
             gravity: "top",
             position: "right",
-            className: "info",
             style: {
-              background: "linear-gradient(to right, red, #f6b93b)",
+                background: "linear-gradient(to right, #ff4b4b, #ff7878)",
             }
-          }).showToast();
-
+        }).showToast();
     }
-}
+});
 
 function editStudent(i) {
     selectedUsers = i;
